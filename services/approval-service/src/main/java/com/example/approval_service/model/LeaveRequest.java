@@ -24,12 +24,14 @@ public class LeaveRequest {
 
     private LocalDate end_date;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private LeaveType type;
 
     @Column(nullable = false)
     private String detail;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private RequestStatus status; // PENDING, APPROVED, REJECTED
 

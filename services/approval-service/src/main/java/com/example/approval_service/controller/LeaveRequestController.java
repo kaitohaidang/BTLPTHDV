@@ -21,7 +21,6 @@ public class LeaveRequestController {
             @RequestHeader("Authorization") String authorizationHeader,
             @RequestBody LeaveRequest leaveRequest) {
 
-        leaveRequest.setCreate_date(LocalDate.now());
         return leaveRequestService.create(authorizationHeader, leaveRequest);
     }
 

@@ -17,8 +17,8 @@ public class RCToLeaveBalanceServiceService {
     }
 
     public Integer getBalance(Integer employeeId) {
-        return leaveBalanceRestClient.post()
-                .uri("/employeeId/{employeeId}", employeeId)
+        return leaveBalanceRestClient.get()
+                .uri("/balance/employeeId/{employeeId}", employeeId)
                 .retrieve()
                 .body(Integer.class);
     }
