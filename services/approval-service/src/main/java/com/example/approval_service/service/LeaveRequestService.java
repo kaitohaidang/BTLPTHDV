@@ -25,6 +25,10 @@ public class LeaveRequestService {
     private RCToLeaveBalanceServiceService rcToLeaveBalanceServiceService;
 
     public LeaveRequest create(String authorizationHeader, LeaveRequest leaveRequest) {
+        leaveRequest.setStatus(RequestStatus.PENDING);
+        leaveRequest.setCreate_date(LocalDate.now());
+        System.out.println(leaveRequest);
+
         Integer employeeId = rcToJWTServiceService.getEmployeeId(authorizationHeader);
 
         if (employeeId == null) {
@@ -83,6 +87,7 @@ public class LeaveRequestService {
         }
 
         leaveRequest.setEnd_date(endDate);
+        System.out.println(leaveRequest);
         return leaveRequestRepository.save(leaveRequest);
     }
 
