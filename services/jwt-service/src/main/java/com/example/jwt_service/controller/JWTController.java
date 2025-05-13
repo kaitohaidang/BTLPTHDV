@@ -19,21 +19,14 @@ public class JWTController {
         return jwtService.generateToken(jwtData.getName(), jwtData.getId(), jwtData.getManager());
     }
 
-    @PostMapping("/validate")
-    public Boolean validateJWT(@RequestHeader("Authorization") String authorizationHeader) {
-        String token = authorizationHeader.replace("Bearer ", "");
-
-        return jwtService.validateToken(token) != null;
-    }
-
-    @PostMapping("/employee")
+    @PostMapping("/getEmployeeId")
     public Integer getEmployeeId(@RequestHeader("Authorization") String authorizationHeader) {
         String token = authorizationHeader.replace("Bearer ", "");
 
         return jwtService.getEmployeeId(token);
     }
 
-    @PostMapping("/manager")
+    @PostMapping("/getManagerId")
     public Integer getManagerId(@RequestHeader("Authorization") String authorizationHeader) {
         String token = authorizationHeader.replace("Bearer ", "");
 

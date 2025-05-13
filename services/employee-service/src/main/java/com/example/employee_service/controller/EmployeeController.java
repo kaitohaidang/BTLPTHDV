@@ -28,7 +28,18 @@ public class EmployeeController {
         return employeeService.getJWT(employee.getUsername(), employee.getPassword());
     }
 
-    @GetMapping("/managerId/{managerId}")
+    @GetMapping("/getEmployeeEmail/{employeeId}")
+    public String getEmployeeEmailById(@PathVariable Integer employeeId) {
+        Employee employee = employeeService.read(employeeId);
+        if (employee == null) {
+            System.out.println("Employee not found");
+            return null;
+        }
+
+        return employee.getEmail();
+    }
+
+    @GetMapping("/getListEmployeeIds/{managerId}")
     public List<Integer> getEmployeeByManagerId(@PathVariable Integer managerId) {
         return employeeService.readListEmployeeIdByManagerId(managerId);
     }

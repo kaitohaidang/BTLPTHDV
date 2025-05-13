@@ -28,7 +28,7 @@ public class JWTService {
                 .claim("uid", id)
                 .claim("uim", isManager)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + exp))
+                .setExpiration(new Date(System.currentTimeMillis() + exp * 1000))
                 .signWith(secretKey, SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -41,7 +41,7 @@ public class JWTService {
                 .getBody();
     }
 
-    public Claims validateToken(String token) {
+    private Claims validateToken(String token) {
         Claims claims = extractClaims(token);
 
         if (claims.getExpiration().before(new Date())){
@@ -58,7 +58,11 @@ public class JWTService {
     }
 
     public Integer getManagerId(String token) {
-        Claims claims = extractClaims(token);
+        Claims claims = validateToken(token);
+
+        if (claims == null) {
+            return null;
+        }
 
         if (claims.get("uim", Boolean.class).equals(false)) {
             return null;
@@ -68,7 +72,11 @@ public class JWTService {
     }
 
     public Integer getEmployeeId(String token) {
-        Claims claims = extractClaims(token);
+        Claims claims = validateToken(token);
+
+        if (claims == null) {
+            return null;
+        }
 
         if (claims.get("uim", Boolean.class).equals(true)) {
             return null;

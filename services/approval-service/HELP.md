@@ -1,7 +1,7 @@
 # Read Me First
 The following was discovered as part of building this project:
 
-* The original package name 'com.example.employee-service' is invalid and this project uses 'com.example.employee_service' instead.
+* The original package name 'com.example.approval-service' is invalid and this project uses 'com.example.approval_service' instead.
 
 # Getting Started
 
