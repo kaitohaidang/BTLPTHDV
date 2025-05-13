@@ -44,4 +44,8 @@ public class EmployeeService {
     public List<Integer> readListEmployeeIdByManagerId(Integer managerId) {
         return employeeRepository.findIdsByManagerId(managerId);
     }
+
+    public Employee read(Integer id) {
+        return employeeRepository.findById(id).orElse(null);
+    }
 }
