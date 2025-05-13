@@ -37,8 +37,10 @@ services:
       dockerfile: Dockerfile
     container_name: employee-service
     restart: always
-    ports:
-      - "8081:8080"
+#    ports:
+#      - "8081:8080"
+    expose:
+      - "8080"
     depends_on:
       - employee-service-db
     environment:
@@ -68,8 +70,10 @@ services:
       dockerfile: Dockerfile
     container_name: leave-service
     restart: always
-    ports:
-      - "8082:8080"
+#    ports:
+#      - "8082:8080"
+    expose:
+      - "8080"
     depends_on:
       - leave-service-db
     environment:
@@ -99,8 +103,10 @@ services:
       dockerfile: Dockerfile
     container_name: approval-service
     restart: always
-    ports:
-      - "8085:8080"
+#    ports:
+#      - "8085:8080"
+    expose:
+      - "8080"
     depends_on:
       - approval-service-db
     environment:
@@ -116,8 +122,10 @@ services:
       dockerfile: Dockerfile
     container_name: jwt-service
     restart: always
-    ports:
-      - "8083:8080"
+#    ports:
+#      - "8083:8080"
+    expose:
+      - "8080"
     environment:
       JWT_SECRET_KEY: ${JWT_SECRET_KEY}
       JWT_EXPIRATION_TIME_BY_SECOND: ${JWT_EXPIRATION_TIME_BY_SECOND}
@@ -130,8 +138,10 @@ services:
       dockerfile: Dockerfile
     container_name: password-service
     restart: always
-    ports:
-      - "8084:8080"
+#    ports:
+#      - "8084:8080"
+    expose:
+      - "8080"
     networks:
       - backend
 
