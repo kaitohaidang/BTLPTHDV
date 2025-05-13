@@ -1,20 +1,21 @@
 services:
 
-#  gateway:
-#    build:
-#      context: ./gateway
-#      dockerfile: Dockerfile
-#    container_name: gateway
-#    restart: always
-#    ports:
-#      - "8080:8080"
-#    depends_on:
-#      - employee-service
-#      - leave-service
-#      - jwt-service
-#      - password-service
-#    networks:
-#      - backend
+  gateway:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    container_name: gateway
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - approval-service
+      - employee-service
+      - leave-service
+      - jwt-service
+      - password-service
+    networks:
+      - backend
 
   employee-service-db:
     image: mysql:8
