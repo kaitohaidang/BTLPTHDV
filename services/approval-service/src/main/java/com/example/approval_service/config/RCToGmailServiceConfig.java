@@ -5,12 +5,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestClient;
 
 @Configuration
-public class RCToEmployeeServiceConfig {
+public class RCToGmailServiceConfig {
 
-    @Bean(name = "employeeRestClient")
-    public RestClient employeeRestClient(RestClient.Builder builder) {
+    @Bean(name = "gmailRestClient")
+    public RestClient gmailRestClient(RestClient.Builder builder) {
         return builder
-                .baseUrl("http://employee-service:8080/employee")
+                .baseUrl("http://gmail-service:8080/gmail")
                 .build();
     }
 }

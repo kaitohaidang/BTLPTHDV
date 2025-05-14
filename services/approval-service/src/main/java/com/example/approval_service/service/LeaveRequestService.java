@@ -24,6 +24,9 @@ public class LeaveRequestService {
     @Autowired
     private RCToLeaveBalanceServiceService rcToLeaveBalanceServiceService;
 
+    @Autowired
+    private RCToGmailServiceService rcToGmailServiceService;
+
     public LeaveRequest create(String authorizationHeader, LeaveRequest leaveRequest) {
         leaveRequest.setStatus(RequestStatus.PENDING);
         leaveRequest.setCreate_date(LocalDate.now());
@@ -126,18 +129,24 @@ public class LeaveRequestService {
             return null;
         }
 
+        if (status != RequestStatus.APPROVED && status != RequestStatus.REJECTED){
+            return null;
+        }
+
         int flag = leaveRequestRepository.updateLeaveRequest(requestId, managerId, status.name(), comment);
         if (flag == 0){
             return 0;
         }
 
-        if (status == RequestStatus.APPROVED && flag == 1) {
-            LeaveRequest leaveRequest = leaveRequestRepository.findById(requestId).orElse(null);
-            if (leaveRequest == null) {
-                return 0;
-            }
+        LeaveRequest leaveRequest = leaveRequestRepository.findById(requestId).orElse(null);
+        if (leaveRequest == null) {
+            return 0;
+        }
 
-            Integer employeeId = leaveRequest.getEmployee_id();
+        Integer employeeId = leaveRequest.getEmployee_id();
+
+        if (status == RequestStatus.APPROVED && flag == 1) {
+
             Integer oldBalance = rcToLeaveBalanceServiceService.getBalance(employeeId);
             int requestedDays = (int) ChronoUnit.DAYS.between(leaveRequest.getCreate_date(), leaveRequest.getEnd_date()) + 1;
             Integer newBalance = oldBalance - requestedDays;
@@ -148,6 +157,28 @@ public class LeaveRequestService {
             }
 
         }
+
+        // Notify By Gmail
+        String to = rcToEmployeeServiceService.getEmployeeEmailById(employeeId);
+
+        String content = "Your Leave Request, type " + leaveRequest.getType() +
+                " created at " + leaveRequest.getCreate_date() +
+                " start from " + leaveRequest.getStart_date() +
+                " to " + leaveRequest.getEnd_date() +
+                ", was ";
+
+        String subject = "LEAVE REQUEST ";
+
+        if (status == RequestStatus.REJECTED){
+            subject += "REJECTED";
+            content += "REJECTED";
+        } else {
+            subject += "APPROVED";
+            content += "APPROVED";
+        }
+
+        rcToGmailServiceService.sendGmail(to, subject, content);
+
         return flag;
     }
 }

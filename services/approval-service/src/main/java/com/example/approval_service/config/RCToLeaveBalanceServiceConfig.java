@@ -8,7 +8,7 @@ import org.springframework.web.client.RestClient;
 public class RCToLeaveBalanceServiceConfig {
 
     @Bean(name = "leaveBalanceRestClient")
-    public RestClient jwtRestClient(RestClient.Builder builder) {
+    public RestClient leaveBalanceRestClient(RestClient.Builder builder) {
         return builder
                 .baseUrl("http://leave-service:8080/leave")
                 .build();
