@@ -145,6 +145,24 @@ services:
     networks:
       - backend
 
+  gmail-service:
+    build:
+      context: ./services/gmail-service
+      dockerfile: Dockerfile
+    container_name: gmail-service
+    restart: always
+    #    ports:
+    #      - "8085:8080"
+    expose:
+      - "8080"
+    environment:
+      MAIL_HOST: ${MAIL_HOST}
+      MAIL_PORT: ${MAIL_PORT}
+      MAIL_USER: ${MAIL_USER}
+      MAIL_PASSWORD: ${MAIL_PASSWORD}
+    networks:
+      - backend
+
 volumes:
   employee_service_mysql-data:
   leave_service_mysql-data:
