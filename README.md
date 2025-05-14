@@ -2,11 +2,43 @@
 
 Một hệ thống microservices để quản lý và phê duyệt đơn xin nghỉ phép trong doanh nghiệp, được phát triển dựa trên kiến trúc hướng dịch vụ (SOA).
 
-![Employee Leave Management System](https://via.placeholder.com/800x400?text=Employee+Leave+Management+System)
 
-## 📋 Tổng Quan Dự Án
 
-Hệ thống Phê Duyệt Đơn Xin Nghỉ Phép là một giải pháp toàn diện cho phép nhân viên nộp đơn xin nghỉ phép qua hệ thống, quản lý phê duyệt hoặc từ chối dựa trên tình trạng làm việc của nhân viên và quy định của công ty. Hệ thống tự động hóa quy trình từ khi nộp đơn đến khi được phê duyệt và thông báo kết quả.
+## Phê duyệt yêu cầu nghỉ phép
+ 
+### Mô tả nghiệp vụ: 
+Quy trình phê duyệt yêu cầu nghỉ phép cho phép nhân viên nộp đơn xin nghỉ phép qua hệ thống. Quản lý sau đó sẽ xem xét yêu cầu và phê duyệt hoặc từ chối dựa trên tình trạng làm việc của nhân viên và các quy định nghỉ phép của công ty. Nếu đơn xin nghỉ được phê duyệt, hệ thống sẽ gửi thông báo cho nhân viên và cập nhật tình trạng nghỉ phép của họ. 
+
+### Yêu cầu phân tích thiết kế hướng dịch vụ cho nghiệp vụ (Usecase)
+
+Phân tích và thiết kế hệ thống phê duyệt yêu cầu nghỉ phép dựa trên kiến trúc hướng dịch vụ (SOA), đảm bảo quy trình từ khi nhân viên nộp đơn, xác minh thông tin, đến phê duyệt hoặc từ chối, và thông báo kết quả được thực hiện tự động và chính xác. 
+
+### Mô tả chi tiết các bước nghiệp vụ: 
+
+1. Nhân viên nộp yêu cầu nghỉ phép: Nhân viên nhập thông tin về ngày nghỉ dự kiến, loại nghỉ phép (ví dụ: nghỉ ốm, nghỉ phép năm), và lý do nộp đơn xin nghỉ. 
+
+2. Nhận thông tin chi tiết về nhân viên: Hệ thống nhận thông tin về nhân viên, bao gồm mã nhân viên, tên, và phòng ban.
+
+3. Kiểm tra lịch sử nghỉ phép: Hệ thống truy xuất lịch sử nghỉ phép của nhân viên để kiểm tra số ngày nghỉ phép đã sử dụng trong năm. 
+
+4. Kiểm tra số ngày nghỉ còn lại: Hệ thống xác minh xem nhân viên còn bao nhiêu ngày nghỉ phép và liệu yêu cầu có vượt quá số ngày nghỉ hiện có hay không.
+
+5. Gửi yêu cầu đến quản lý: Nếu thông tin hợp lệ, hệ thống gửi yêu cầu nghỉ phép đến quản lý trực tiếp của nhân viên để phê duyệt. 
+
+6. Quản lý nhận thông báo yêu cầu phê duyệt: Quản lý nhận được thông báo về yêu cầu nghỉ phép của nhân viên và truy cập hệ thống để xem chi tiết. 
+
+7. Xem xét yêu cầu: Quản lý kiểm tra thông tin yêu cầu, bao gồm ngày nghỉ, lý do, và tình trạng công việc hiện tại.
+
+8. Phê duyệt hoặc từ chối yêu cầu: Quản lý quyết định phê duyệt hoặc từ chối yêu cầu dựa trên thông tin đã xem xét. 
+
+9. Nếu phê duyệt, hệ thống gửi thông báo chấp nhận: Nếu quản lý phê duyệt yêu cầu, hệ thống gửi thông báo chấp nhận nghỉ phép cho nhân viên và cập nhật lịch nghỉ. 
+
+10. Nếu từ chối, hệ thống gửi thông báo từ chối: Nếu quản lý từ chối yêu cầu, hệ thống gửi thông báo từ chối cho nhân viên kèm lý do. 
+
+11. Cập nhật trạng thái nghỉ phép của nhân viên: Nếu yêu cầu được phê duyệt, hệ thống cập nhật trạng thái nghỉ phép của nhân viên trong hệ thống quản lý nhân sự.
+
+12. Kết thúc quy trình: Quy trình kết thúc sau khi hệ thống gửi thông báo và cập nhật thông tin.
+
 
 ## 👩‍💻 Thành Viên Nhóm
 
@@ -15,38 +47,7 @@ Hệ thống Phê Duyệt Đơn Xin Nghỉ Phép là một giải pháp toàn di
 | Phan Tiến Tài | B21DCCN655 |
 | Lê Nguyễn Hải Đăng | B21DCCN200 |
 | Phạm Đức Anh | B18DCCN033 |
-### Tính Năng Chính
 
-- **Nộp đơn nghỉ phép**: Nhân viên có thể nộp các loại đơn nghỉ phép khác nhau
-- **Quản lý số ngày nghỉ**: Theo dõi và quản lý số ngày nghỉ phép đã sử dụng và còn lại
-- **Phê duyệt tự động**: Quy trình phê duyệt đơn tự động từ quản lý trực tiếp
-- **Thông báo**: Thông báo tự động về trạng thái đơn
-- **Báo cáo**: Tạo báo cáo về tình trạng nghỉ phép của nhân viên
-
-## 🏗️ Kiến Trúc Hệ Thống
-
-Hệ thống được xây dựng theo kiến trúc microservices, với các thành phần chính:
-
-- **Gateway Service**: Điểm vào duy nhất cho tất cả các request API
-- **Employee Service**: Quản lý thông tin nhân viên và xác thực
-- **Leave Service**: Quản lý số ngày nghỉ phép và loại nghỉ phép
-- **Approval Service**: Xử lý quy trình phê duyệt đơn
-- **JWT Service**: Quản lý xác thực và phân quyền
-- **Password Service**: Xử lý mã hóa và xác thực mật khẩu
-
-![Architecture Diagram](https://via.placeholder.com/800x500?text=Microservices+Architecture)
-
-## 🚀 Quy Trình Nghiệp Vụ
-
-Quy trình phê duyệt đơn xin nghỉ phép bao gồm các bước sau:
-
-1. **Nộp đơn**: Nhân viên nộp đơn với thông tin ngày nghỉ, loại nghỉ phép và lý do
-2. **Kiểm tra thông tin**: Hệ thống kiểm tra thông tin nhân viên và số ngày nghỉ còn lại
-3. **Gửi yêu cầu phê duyệt**: Đơn được gửi đến quản lý trực tiếp của nhân viên
-4. **Xem xét đơn**: Quản lý xem xét chi tiết đơn và tình trạng công việc hiện tại
-5. **Quyết định**: Quản lý phê duyệt hoặc từ chối đơn dựa trên các tiêu chí
-6. **Thông báo kết quả**: Hệ thống gửi thông báo về kết quả cho nhân viên
-7. **Cập nhật hệ thống**: Nếu được phê duyệt, hệ thống cập nhật số ngày nghỉ còn lại
 
 ## 💻 Công Nghệ Sử Dụng
 
@@ -99,55 +100,8 @@ Quy trình phê duyệt đơn xin nghỉ phép bao gồm các bước sau:
    - Backend API: http://localhost:8080
    - Frontend: http://localhost:3000
 
-## 📚 API Documentation
-
-### Employee Service
-
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/employee/register` | POST | Đăng ký tài khoản nhân viên mới |
-| `/employee/login` | POST | Đăng nhập và lấy JWT token |
-| `/employee/getListEmployeeIds/{managerId}` | GET | Lấy danh sách ID nhân viên dưới quyền quản lý |
-
-### Leave Service
-
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/leave` | POST | Tạo số dư ngày nghỉ phép cho nhân viên |
-| `/leave/balance/employeeId/{employeeId}` | GET | Lấy số ngày nghỉ phép còn lại của nhân viên |
-| `/leave/balance` | POST | Cập nhật số ngày nghỉ phép |
-
-### Approval Service
-
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/request` | POST | Tạo đơn xin nghỉ phép mới |
-| `/request/getMyLeaveRequest` | GET | Lấy danh sách đơn xin nghỉ phép của bản thân |
-| `/request/getMyEmployeesPendingLeaveRequest` | GET | Lấy danh sách đơn chờ phê duyệt (cho quản lý) |
-| `/request/updatePendingLeaveRequest/{requestId}` | POST | Phê duyệt/từ chối đơn nghỉ phép |
-
-### JWT Service
-
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/jwt` | POST | Tạo token JWT mới |
-| `/jwt/getEmployeeId` | POST | Lấy ID nhân viên từ token |
-| `/jwt/getManagerId` | POST | Lấy ID quản lý từ token |
-
-### Password Service
-
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/password/create` | POST | Tạo mật khẩu đã mã hóa |
-| `/password/check` | POST | Kiểm tra mật khẩu |
 
 
-
-## 🔗 Liên Kết Hữu Ích
-
-- [Tài liệu API](./docs/api-specs/)
-- [Kiến trúc hệ thống](./docs/architecture.md)
-- [Phân tích và thiết kế hệ thống](./docs/analysis-and-design.md)
 
 ## 📜 Giấy Phép
 
