@@ -1,3 +1,8 @@
+# Read Me First
+The following was discovered as part of building this project:
+
+* The original package name 'com.example.gmail-service' is invalid and this project uses 'com.example.gmail_service' instead.
+
 # Getting Started
 
 ### Reference Documentation
@@ -8,6 +13,7 @@ For further reference, please consider the following sections:
 * [Create an OCI image](https://docs.spring.io/spring-boot/3.4.5/maven-plugin/build-image.html)
 * [Spring Web](https://docs.spring.io/spring-boot/3.4.5/reference/web/servlet.html)
 * [Spring Boot DevTools](https://docs.spring.io/spring-boot/3.4.5/reference/using/devtools.html)
+* [Java Mail Sender](https://docs.spring.io/spring-boot/3.4.5/reference/io/email.html)
 
 ### Guides
 The following guides illustrate how to use some features concretely:
